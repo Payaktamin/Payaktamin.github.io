@@ -1,0 +1,49 @@
+body {
+  background:black;
+}
+
+svg {
+  width:100%;
+  height:100%;
+  // start the 4s strobe effect after 15s
+  animation: keystrobe 4s 15s infinite;
+}
+@keyframes keystrobe {
+  0%,7% { transform:translate(100px,0px) rotate(10deg);  opacity: 0;}
+  10%,20% { transform:translate(100px,0px) rotate(10deg);  opacity: 1;}
+  23% { transform:translate(100px,0px) rotate(10deg);  opacity: 0;}
+  25% { transform:translate(50px,0px) rotate(5deg);  opacity: 0;}
+  28%,38% { transform:translate(50px,0px) rotate(5deg);  opacity: 1;}
+  41% { transform:translate(50px,0px) rotate(5deg);  opacity: 0;}
+  43% { transform:translate(0px,0px) rotate(0deg);  opacity: 0;}
+  46%,90% { transform:translate(0px,0px) rotate(0deg);  opacity: 1;}
+  100% { transform:translate(0px,0px) rotate(0deg);  opacity: 0;}
+}
+
+@for $i from 2 through 12 {
+  path:nth-child(#{$i}) {
+      animation: keyfadeout 1s 3s forwards;
+  }
+}
+
+@keyframes keyfadeout {
+  // hide the background and title
+  100% {fill:yelllow; opacity:0.0;}
+}
+
+@for $i from 12 through 400 {
+  path:nth-child(#{$i}) {
+    transform-origin:center center;
+     transform:  translate(-10000px, 0px);
+    // important section to set different animation delay for each path
+    animation:slidein 8s #{$i*0.02}s forwards;
+  }
+}
+
+
+@keyframes slidein {
+  0%,90% { fill:white; }
+  10% { transform: translate(0px, 0px); fill:green; }
+  70% { transform: translate(0px, 0px) scale(5,5);  }
+  100% { transform: translate(0px, 0px) scale(1,1);  }
+}
